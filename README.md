@@ -12,11 +12,9 @@ openwtester包下的测试用例已经集成了openwallet钱包体系，创建co
 ```ini
 
 # RPC Server Type，0: CoreWallet RPC; 1: Explorer API
-rpcServerType = 1
+rpcServerType = 0
 # node api url, if RPC Server Type = 0, use bitcoin core full node
 ;serverAPI = "http://127.0.0.1:8333/"
-# node api url, if RPC Server Type = 1, use bitbay insight-api
-serverAPI = "http://127.0.0.1::20003/insight-api/"
 # RPC Authentication Username
 rpcUser = "user"
 # RPC Authentication Password
