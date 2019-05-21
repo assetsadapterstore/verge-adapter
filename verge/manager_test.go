@@ -45,7 +45,7 @@ func testNewWalletManager() *WalletManager {
 	//log.Debug("absFile:", absFile)
 	c, err := config.NewConfig("ini", absFile)
 	if err != nil {
-		return nil
+		panic(err)
 	}
 	wm.LoadAssetsConfig(c)
 	//wm.ExplorerClient.Debug = false
@@ -434,7 +434,7 @@ func TestGetBlockChainInfo(t *testing.T) {
 }
 
 func TestListUnspent(t *testing.T) {
-	utxos, err := tw.ListUnspent(0, "LV9Cc8ari9qDzx3URdvb4ofZf8mThoxCZa")
+	utxos, err := tw.ListUnspent(0, "DMS4UjY3NXWo2PK3muWEdRiJE4219kMvjU")
 	if err != nil {
 		t.Errorf("ListUnspent failed unexpected error: %v\n", err)
 		return
@@ -485,14 +485,14 @@ func TestListUnspentFromLocalDB(t *testing.T) {
 }
 
 func TestBuildTransaction(t *testing.T) {
-	walletID := "W4ruoAyS5HdBMrEeeHQTBxo4XtaAixheXQ"
-	utxos, err := tw.ListUnspentFromLocalDB(walletID)
+	address := "DMS4UjY3NXWo2PK3muWEdRiJE4219kMvjU"
+	utxos, err := tw.ListUnspent(1, address)
 	if err != nil {
 		t.Errorf("BuildTransaction failed unexpected error: %v\n", err)
 		return
 	}
 
-	txRaw, _, err := tw.BuildTransaction(utxos, []string{"mrThNMQ6bMf1YNPjBj9jYXmYYzw1Rt8GFU"}, "n33cHpEc9qAvECM9pFgabZ6ktJimLSeWdy", []decimal.Decimal{decimal.NewFromFloat(0.2)}, decimal.NewFromFloat(0.00002))
+	txRaw, _, err := tw.BuildTransaction(utxos, []string{"DMS4UjY3NXWo2PK3muWEdRiJE4219kMvjU"}, "DMS4UjY3NXWo2PK3muWEdRiJE4219kMvjU", []decimal.Decimal{decimal.NewFromFloat(0.2)}, decimal.NewFromFloat(0.00002))
 	if err != nil {
 		t.Errorf("BuildTransaction failed unexpected error: %v\n", err)
 		return
@@ -602,3 +602,13 @@ func TestWalletManager_ImportAddress(t *testing.T) {
 	}
 	log.Info("imported success")
 }
+
+//func TestWalletManager_SendToAddress(t *testing.T) {
+//	addr := "DQ9p8S23BQatSuNiGnmQTLQVDnLacmQe8p"
+//	txid, err := tw.SendToAddress(addr, 8)
+//	if err != nil {
+//		t.Errorf("SendToAddress failed unexpected error: %v\n", err)
+//		return
+//	}
+//	log.Infof("txid: %s", txid)
+//}

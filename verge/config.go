@@ -15,12 +15,16 @@
 
 package verge
 
-import "github.com/blocktree/go-owcdrivers/btcTransaction"
+import (
+	"github.com/blocktree/go-owcdrivers/btcTransaction"
+	"github.com/blocktree/go-owcrypt"
+)
 
 const (
 	//币种
 	Symbol    = "XVG"
-	MasterKey = "verge seed"
+	CurveType = owcrypt.ECC_CURVE_SECP256K1
+	Decimals  = int32(6)
 )
 
 var (

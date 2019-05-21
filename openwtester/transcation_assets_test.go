@@ -118,17 +118,30 @@ func testSubmitTransactionStep(tm *openw.WalletManager, rawTx *openwallet.RawTra
 }
 
 func TestTransfer(t *testing.T) {
+
+	//DGWBnYcdieyAHiXVJmo1twJsGZRJG9jttB
+	//DGiVAF3MPhaDvSmz7CZYv4hqqJ9C2ugXvj
+	//DMjLf1LtHXbviF3wwfTRYai8mQ9WF2TVqM
+	//DN1UZw6Vy7bZkubhT1MCo1iwC21XVrLLMi
+	//DPEmW9o1nK6JUiYnuDfd7RFLaKdSwddYjS
+
 	tm := testInitWalletManager()
 	walletID := "WKeGZFy4x2xQKbHuLxYmEFhZMBTgDMHKrN"
-	accountID := "KLqnWkpt7JXPYETNoY5Tf559JcnX7g6JRubPdkFSKgJ"
-	to := "DFNsTT6DteYzzHUoW56kE8U1XoPW7tKUPA"
+	//accountID := "KLqnWkpt7JXPYETNoY5Tf559JcnX7g6JRubPdkFSKgJ"
+	//to := "DFNsTT6DteYzzHUoW56kE8U1XoPW7tKUPA"
 
+	//accountID := "8LBY8nin2TZ5KwLmXpTpLebH2fjQNBTH4cQRNyjgosGt"
 	//accountID := "ArCqZ6ceXzE8UbhtpGzJUeT246DBWDqveCaF3mtsww1S"
-	//to := "2YARdSbYnAriqdAu2rauNr3gvbEoqhdnTt"
+	//to := "DFktR2ZGt5pZ3zakH3NBauY4nxYnwjZCxX"
+
+	accountID := "HzXX31szyE3xnRgbrgLJH3fQBz5cUaXKpa5BJD5xzMpn"
+	to := "DPEmW9o1nK6JUiYnuDfd7RFLaKdSwddYjS"
+
+	//4ruspmbSreHAWXhxg6UiP6sGacuN4Ra1bdcE2GZMCt2B
 
 	testGetAssetsAccountBalance(tm, walletID, accountID)
 
-	rawTx, err := testCreateTransactionStep(tm, walletID, accountID, to, "1", "", nil)
+	rawTx, err := testCreateTransactionStep(tm, walletID, accountID, to, "5", "", nil)
 	if err != nil {
 		return
 	}
@@ -154,9 +167,9 @@ func TestTransfer(t *testing.T) {
 
 func TestSummary(t *testing.T) {
 	tm := testInitWalletManager()
-	walletID := "W99vKMidCHAfmp3ngHUqFvDCW5ZjqMRrGL"
-	accountID := "Ao2wUCr51JH3bvw2zS4QAqVR1nnvKuqPanmB9LL8ZvbU"
-	summaryAddress := "2M3XABYEqqWf5CC9RZjRKb8dwJKo28uB3v"
+	walletID := "WKeGZFy4x2xQKbHuLxYmEFhZMBTgDMHKrN"
+	accountID := "4ruspmbSreHAWXhxg6UiP6sGacuN4Ra1bdcE2GZMCt2B"
+	summaryAddress := "DQ9p8S23BQatSuNiGnmQTLQVDnLacmQe8p"
 
 	testGetAssetsAccountBalance(tm, walletID, accountID)
 
