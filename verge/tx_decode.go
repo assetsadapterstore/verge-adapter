@@ -182,6 +182,7 @@ func (decoder *TransactionDecoder) CreateBTCRawTransaction(wrapper openwallet.Wa
 	//计算总发送金额
 	for addr, amount := range rawTx.To {
 		deamount, _ := decimal.NewFromString(amount)
+		deamount = deamount.Truncate(decoder.wm.Decimal())
 		totalSend = totalSend.Add(deamount)
 		destinations = append(destinations, addr)
 		//计算账户的实际转账amount
