@@ -21,6 +21,8 @@ rpcUser = "user"
 rpcPassword = "password"
 # Is network test?
 isTestNet = false
+# Cache data file directory, default = "", current directory: ./data
+dataDir = ""
 
 ```
 
