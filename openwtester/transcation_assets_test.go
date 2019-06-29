@@ -16,11 +16,10 @@
 package openwtester
 
 import (
-	"github.com/blocktree/openwallet/openw"
-	"testing"
-
 	"github.com/blocktree/openwallet/log"
+	"github.com/blocktree/openwallet/openw"
 	"github.com/blocktree/openwallet/openwallet"
+	"testing"
 )
 
 func testGetAssetsAccountBalance(tm *openw.WalletManager, walletID, accountID string) {
@@ -119,57 +118,57 @@ func testSubmitTransactionStep(tm *openw.WalletManager, rawTx *openwallet.RawTra
 
 func TestTransfer(t *testing.T) {
 
-	//DGWBnYcdieyAHiXVJmo1twJsGZRJG9jttB
-	//DGiVAF3MPhaDvSmz7CZYv4hqqJ9C2ugXvj
-	//DMjLf1LtHXbviF3wwfTRYai8mQ9WF2TVqM
-	//DN1UZw6Vy7bZkubhT1MCo1iwC21XVrLLMi
-	//DPEmW9o1nK6JUiYnuDfd7RFLaKdSwddYjS
+	targets := []string{
+		"DKRfQijPJW9cs2e6pw8E2Nw3vaV8CEGZ1A",
+		"DLaqsdnbiaszMRFjkbQKZdFBKJLCnTsTRd",
+		"DMZY5CFBViKjSgtqpjuLc698LkitjETx5q",
+		"DMtENbdTezANcDPFdDg6tNsXpRGWhWdXaT",
+		"DNGDtVEZLipugNX6eNdZHmhYQajjW3DATm",
+		"DQo8AmrR48goDFsw2n1dzG1t6fXgdAad5P",
+		"DRuujKGrdwpbXDnFv6Ypot576rq3c8MfFx",
+		"DTJ2pZYGUE9vevaziBNxYiaQkeYfiw7yCd",
+		"DTvwPGze6kT8pCecUx6dWp418Y5HsqEawT",
+	}
 
 	tm := testInitWalletManager()
-	walletID := "WKeGZFy4x2xQKbHuLxYmEFhZMBTgDMHKrN"
-	//accountID := "KLqnWkpt7JXPYETNoY5Tf559JcnX7g6JRubPdkFSKgJ"
-	//to := "DFNsTT6DteYzzHUoW56kE8U1XoPW7tKUPA"
 
-	//accountID := "8LBY8nin2TZ5KwLmXpTpLebH2fjQNBTH4cQRNyjgosGt"
-	//accountID := "ArCqZ6ceXzE8UbhtpGzJUeT246DBWDqveCaF3mtsww1S"
-	//to := "DFktR2ZGt5pZ3zakH3NBauY4nxYnwjZCxX"
+	for _, to := range targets {
+		walletID := "WKeGZFy4x2xQKbHuLxYmEFhZMBTgDMHKrN"
+		accountID := "3z5ArWWdgU1hXGU7XmLNMhBBHg6ERBrjBu5Dy88wQnN7"
 
-	accountID := "HzXX31szyE3xnRgbrgLJH3fQBz5cUaXKpa5BJD5xzMpn"
-	to := "DQkh4yrgGUockKyXH2AXz7zVBFVxRxiTMP"
+		testGetAssetsAccountBalance(tm, walletID, accountID)
 
-	//4ruspmbSreHAWXhxg6UiP6sGacuN4Ra1bdcE2GZMCt2B
+		rawTx, err := testCreateTransactionStep(tm, walletID, accountID, to, "1.23456789", "", nil)
+		if err != nil {
+			return
+		}
 
-	testGetAssetsAccountBalance(tm, walletID, accountID)
+		log.Std.Info("rawTx: %+v", rawTx)
 
-	rawTx, err := testCreateTransactionStep(tm, walletID, accountID, to, "0.123456789", "", nil)
-	if err != nil {
-		return
+		_, err = testSignTransactionStep(tm, rawTx)
+		if err != nil {
+			return
+		}
+
+		_, err = testVerifyTransactionStep(tm, rawTx)
+		if err != nil {
+			return
+		}
+
+		_, err = testSubmitTransactionStep(tm, rawTx)
+		if err != nil {
+			return
+		}
+
+		//time.Sleep(2 * time.Minute)
 	}
-
-	log.Std.Info("rawTx: %+v", rawTx)
-
-	_, err = testSignTransactionStep(tm, rawTx)
-	if err != nil {
-		return
-	}
-
-	_, err = testVerifyTransactionStep(tm, rawTx)
-	if err != nil {
-		return
-	}
-
-	_, err = testSubmitTransactionStep(tm, rawTx)
-	if err != nil {
-		return
-	}
-
 }
 
 func TestSummary(t *testing.T) {
 	tm := testInitWalletManager()
 	walletID := "WKeGZFy4x2xQKbHuLxYmEFhZMBTgDMHKrN"
-	accountID := "4ruspmbSreHAWXhxg6UiP6sGacuN4Ra1bdcE2GZMCt2B"
-	summaryAddress := "DQ9p8S23BQatSuNiGnmQTLQVDnLacmQe8p"
+	accountID := "7g6NoEUmqARKCoUnY6B8LNTmbnEBiDuQ6jCPWLAsQhtZ"
+	summaryAddress := "DKZZnT8N18XAdNzPVLoG8C9WeM683tsyqb"
 
 	testGetAssetsAccountBalance(tm, walletID, accountID)
 

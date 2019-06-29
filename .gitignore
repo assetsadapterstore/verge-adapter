@@ -1,2 +1,5 @@
 verge/conf
 go.sum
+.idea
+openwtester/openw_data
+openwtester/conf

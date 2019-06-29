@@ -1,6 +1,7 @@
 package openwtester
 
 import (
+	"fmt"
 	"github.com/blocktree/openwallet/log"
 	"github.com/blocktree/openwallet/openw"
 	"github.com/blocktree/openwallet/openwallet"
@@ -111,8 +112,8 @@ func TestWalletManager_CreateAddress(t *testing.T) {
 	tm := testInitWalletManager()
 
 	walletID := "WKeGZFy4x2xQKbHuLxYmEFhZMBTgDMHKrN"
-	accountID := "4ruspmbSreHAWXhxg6UiP6sGacuN4Ra1bdcE2GZMCt2B"
-	address, err := tm.CreateAddress(testApp, walletID, accountID, 5)
+	accountID := "7g6NoEUmqARKCoUnY6B8LNTmbnEBiDuQ6jCPWLAsQhtZ"
+	address, err := tm.CreateAddress(testApp, walletID, accountID, 20)
 	if err != nil {
 		log.Error(err)
 		return
@@ -128,14 +129,14 @@ func TestWalletManager_GetAddressList(t *testing.T) {
 	tm := testInitWalletManager()
 
 	walletID := "WKeGZFy4x2xQKbHuLxYmEFhZMBTgDMHKrN"
-	accountID := "4ruspmbSreHAWXhxg6UiP6sGacuN4Ra1bdcE2GZMCt2B"
+	accountID := "7g6NoEUmqARKCoUnY6B8LNTmbnEBiDuQ6jCPWLAsQhtZ"
 	list, err := tm.GetAddressList(testApp, walletID, accountID, 0, -1, false)
 	if err != nil {
 		log.Error("unexpected error:", err)
 		return
 	}
-	for i, w := range list {
-		log.Info("address[", i, "] :", w.Address)
+	for _, w := range list {
+		fmt.Printf("%s\n", w.Address)
 	}
 	log.Info("address count:", len(list))
 

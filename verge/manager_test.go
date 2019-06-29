@@ -434,14 +434,14 @@ func TestGetBlockChainInfo(t *testing.T) {
 }
 
 func TestListUnspent(t *testing.T) {
-	utxos, err := tw.ListUnspent(0, "DMS4UjY3NXWo2PK3muWEdRiJE4219kMvjU")
+	utxos, err := tw.ListUnspent(0, "DMtENbdTezANcDPFdDg6tNsXpRGWhWdXaT")
 	if err != nil {
 		t.Errorf("ListUnspent failed unexpected error: %v\n", err)
 		return
 	}
 
 	for _, u := range utxos {
-		t.Logf("ListUnspent %s: %s = %s\n", u.Address, u.AccountID, u.Amount)
+		t.Logf("ListUnspent %s: %s = %s, %d\n", u.Address, u.AccountID, u.Amount, u.Confirmations)
 	}
 }
 
