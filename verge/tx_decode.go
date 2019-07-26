@@ -324,7 +324,7 @@ func (decoder *TransactionDecoder) SignBTCRawTransaction(wrapper openwallet.Wall
 			if err != nil {
 				return err
 			}
-			decoder.wm.Log.Debug("privateKey:", hex.EncodeToString(keyBytes))
+			//decoder.wm.Log.Debug("privateKey:", hex.EncodeToString(keyBytes))
 
 			//privateKeys = append(privateKeys, keyBytes)
 			txHash := keySignature.Message
