@@ -535,6 +535,10 @@ func (decoder *TransactionDecoder) CreateBTCSummaryRawTransaction(wrapper openwa
 			retainedBalanceTotal := retainedBalance.Mul(decimal.New(int64(len(outputAddrs)), 0))
 			sumAmount := totalInputAmount.Sub(retainedBalanceTotal).Sub(fees)
 
+			if sumAmount.LessThanOrEqual(decimal.Zero) {
+				return nil, openwallet.Errorf(openwallet.ErrInsufficientFees, "account's balance is not enough to pay fees")
+			}
+
 			decoder.wm.Log.Debugf("totalInputAmount: %v", totalInputAmount)
 			decoder.wm.Log.Debugf("retainedBalanceTotal: %v", retainedBalanceTotal)
 			decoder.wm.Log.Debugf("fees: %v", fees)
