@@ -17,6 +17,7 @@ package verge
 
 import (
 	"encoding/hex"
+	"fmt"
 	"github.com/assetsadapterstore/verge-adapter/verge_addrdec"
 	"testing"
 )
@@ -60,4 +61,10 @@ func TestAddressDecoder_ScriptPubKeyToBech32Address(t *testing.T) {
 
 
 	t.Logf("addr: %s", addr)
+}
+
+func TestAddressDecoder_PublicKeyToAddress(t *testing.T) {
+	pub, _ := hex.DecodeString("027a785253aef82a116072d622a57ee46cb8501fbfaf76dfe95ed1f1f91b3eed8f")
+	addr, _ := tw.GetAddressDecode().PublicKeyToAddress(pub, false)
+	fmt.Println(addr)
 }
