@@ -13,16 +13,18 @@ openwtester包下的测试用例已经集成了openwallet钱包体系，创建co
 
 # RPC Server Type，0: CoreWallet RPC; 1: Explorer API
 rpcServerType = 0
-# node api url, if RPC Server Type = 0, use bitcoin core full node
-;serverAPI = "http://127.0.0.1:8333/"
+# node api url
+serverAPI = "http://"
 # RPC Authentication Username
-rpcUser = "user"
+rpcUser = "walletUser"
 # RPC Authentication Password
-rpcPassword = "password"
+rpcPassword = "walletPassword2019"
 # Is network test?
 isTestNet = false
-# Cache data file directory, default = "", current directory: ./data
-dataDir = ""
+# support segWit
+supportSegWit = false
+# minimum transaction fees
+minFees = "0.2"
 
 ```
 
