@@ -2,6 +2,7 @@ package verge_addrdec
 
 import (
 	"github.com/blocktree/go-owcdrivers/addressEncoder"
+	"github.com/blocktree/openwallet/openwallet"
 )
 
 const (
@@ -23,6 +24,7 @@ var (
 
 //AddressDecoderV2
 type AddressDecoderV2 struct {
+	*openwallet.AddressDecoderV2Base
 	IsTestNet bool
 }
 

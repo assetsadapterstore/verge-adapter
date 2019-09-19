@@ -119,16 +119,16 @@ func testSubmitTransactionStep(tm *openw.WalletManager, rawTx *openwallet.RawTra
 func TestTransfer(t *testing.T) {
 
 	targets := []string{
-		//"DKRfQijPJW9cs2e6pw8E2Nw3vaV8CEGZ1A",
-		//"DLaqsdnbiaszMRFjkbQKZdFBKJLCnTsTRd",
+		"DKRfQijPJW9cs2e6pw8E2Nw3vaV8CEGZ1A",
+		"DLaqsdnbiaszMRFjkbQKZdFBKJLCnTsTRd",
 		"DMZY5CFBViKjSgtqpjuLc698LkitjETx5q",
 		"DMtENbdTezANcDPFdDg6tNsXpRGWhWdXaT",
 		"DNGDtVEZLipugNX6eNdZHmhYQajjW3DATm",
-		//"DQo8AmrR48goDFsw2n1dzG1t6fXgdAad5P",
-		//"DRuujKGrdwpbXDnFv6Ypot576rq3c8MfFx",
-		//"DTJ2pZYGUE9vevaziBNxYiaQkeYfiw7yCd",
-		//"DTvwPGze6kT8pCecUx6dWp418Y5HsqEawT",
-		//"DJv9nSJrtaqUrcxBTehGjhRsTzvEoB84Dr",
+		"DQo8AmrR48goDFsw2n1dzG1t6fXgdAad5P",
+		"DRuujKGrdwpbXDnFv6Ypot576rq3c8MfFx",
+		"DTJ2pZYGUE9vevaziBNxYiaQkeYfiw7yCd",
+		"DTvwPGze6kT8pCecUx6dWp418Y5HsqEawT",
+		"DJv9nSJrtaqUrcxBTehGjhRsTzvEoB84Dr",
 	}
 
 	tm := testInitWalletManager()

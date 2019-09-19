@@ -17,10 +17,14 @@ package verge
 
 import (
 	"fmt"
-	"github.com/blocktree/bitcoin-adapter/bitcoin"
 	"github.com/assetsadapterstore/verge-adapter/verge_addrdec"
+	"github.com/blocktree/bitcoin-adapter/bitcoin"
 	"github.com/blocktree/go-owcdrivers/addressEncoder"
 	"github.com/blocktree/go-owcrypt"
+)
+
+const (
+	maxCreatingSize = 3 //并发的程数
 )
 
 func init() {
@@ -36,13 +40,15 @@ func init() {
 //)
 
 type addressDecoder struct {
-	wm *WalletManager //钱包管理者
+	importingCH chan struct{}  //工作令牌，因为并发导入会导致节点返回空，所以限制调用线程数
+	wm          *WalletManager //钱包管理者
 }
 
 //NewAddressDecoder 地址解析器
 func NewAddressDecoder(wm *WalletManager) *addressDecoder {
 	decoder := addressDecoder{}
 	decoder.wm = wm
+	decoder.importingCH = make(chan struct{}, maxCreatingSize)
 	return &decoder
 }
 
@@ -69,11 +75,13 @@ func (decoder *addressDecoder) PublicKeyToAddress(pub []byte, isTestnet bool) (s
 	}
 
 	if decoder.wm.Config.RPCServerType == bitcoin.RPCServerCore {
+		decoder.importingCH <- struct{}{}
 		//如果使用core钱包作为全节点，需要导入地址到core，这样才能查询地址余额和utxo
 		err := decoder.wm.ImportAddress(address, "")
 		if err != nil {
 			return "", err
 		}
+		<-decoder.importingCH
 	}
 
 	return address, nil
